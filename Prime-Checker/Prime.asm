@@ -30,6 +30,14 @@
             INT 21H		; via DOS interrupt
             SUB AL,30H		; subtract ASCII numeric bias of 30H leaving raw binary in AL
             MOV VAL1,AL		; save a copy of this binary value as a variable
+
+            CMP VAL1, 1H        ; compare the inputted value with 1
+            JBE LBL2            ; if it is 0 or 1 output that the number is not prime
+
+            CMP VAL1, 3H        ; compare the inputted value with 3
+            JBE LBL3            ; if it is 0|1|2|3 output that the number is prime
+
+            ; note, the case of 0 or 1 can not reach to this part of code, because of the comparision on line 34
             
             MOV AH,00		; clear AH so we have a clean AX/CL division
             MOV CL,2		; set up to divide AX by 2
